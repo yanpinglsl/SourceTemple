@@ -16,7 +16,7 @@
       },
       "ancmHostingModel": "OutOfProcess"
     },
-    "Zhaoxi.MicroService.Client": {
+    "YY.MicroService.Client": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Zhaoxi.MicroService.Client.Models;
+using YY.MicroService.Client.Models;
 
-namespace Zhaoxi.MicroService.Client.Controllers
+namespace YY.MicroService.Client.Controllers
 {
     public class HomeController : Controller
     {

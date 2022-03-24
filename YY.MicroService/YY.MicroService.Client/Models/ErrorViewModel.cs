@@ -1,6 +1,6 @@
 using System;
 
-namespace Zhaoxi.MicroService.Client.Models
+namespace YY.MicroService.Client.Models
 {
     public class ErrorViewModel
     {

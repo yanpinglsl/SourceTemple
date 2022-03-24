@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zhaoxi.MicroService.Framework.HttpApiExtend
+namespace YY.MicroService.Framework.HttpApiExtend
 {
     /// <summary>
     /// 调用HttpAPI的帮助类

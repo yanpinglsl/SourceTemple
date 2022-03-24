@@ -11,8 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using YY.MicroService.Framework;
+using YY.MicroService.Framework.ConsulExtend;
+using YY.MicroService.Framework.HttpApiExtend;
+using YY.MicroService.Interface;
+using YY.MicroService.Service;
 
-namespace Zhaoxi.MicroService.ServiceInstance
+namespace YY.MicroService.ServiceInstance
 {
     public class Startup
     {
@@ -28,9 +33,22 @@ namespace Zhaoxi.MicroService.ServiceInstance
         {
 
             services.AddControllers();
+
+            services.AddTransient<IUserService, UserService>();
+            #region Consul Server IOC×¢²á
+            services.Configure<ConsulRegisterOptions>(this.Configuration.GetSection("ConsulRegisterOptions"));
+            services.Configure<ConsulClientOptions>(this.Configuration.GetSection("ConsulClientOptions"));
+            services.AddConsulRegister();
+            services.AddConsulDispatcher(ConsulDispatcherType.Polling);
+            #endregion
+            services.AddHttpInvoker(options =>
+            {
+                options.Message = "This is Program's Message";
+            });
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Zhaoxi.MicroService.ServiceInstance", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "YY.MicroService.ServiceInstance", Version = "v1" });
             });
         }
 
@@ -41,8 +59,13 @@ namespace Zhaoxi.MicroService.ServiceInstance
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Zhaoxi.MicroService.ServiceInstance v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "YY.MicroService.ServiceInstance v1"));
             }
+
+            #region Consul×¢²á
+            app.UseHealthCheckMiddleware("/Api/Health/Index");//ÐÄÌøÇëÇóÏìÓ¦
+            app.ApplicationServices.GetService<IConsulRegister>()?.UseConsulRegist();
+            #endregion
 
             app.UseHttpsRedirection();
 

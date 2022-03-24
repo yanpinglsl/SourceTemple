@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Zhaoxi.MicroService.Model
+namespace YY.MicroService.Model
 {
     public class User
     {

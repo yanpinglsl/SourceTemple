@@ -1,6 +1,6 @@
 using System;
 
-namespace Zhaoxi.MicroService.ServiceInstance
+namespace YY.MicroService.ServiceInstance
 {
     public class WeatherForecast
     {

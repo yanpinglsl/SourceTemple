@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zhaoxi.MicroService.Framework.HttpApiExtend
+namespace YY.MicroService.Framework.HttpApiExtend
 {
     public class HttpAPIInvokerOptions
     {
