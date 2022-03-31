@@ -31,7 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YY.MicroService.Polly", "YY
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YY.MicroService.Polly.WebApi", "YY.MicroService.Polly.WebApi\YY.MicroService.Polly.WebApi.csproj", "{E586B466-6029-457E-AF24-A75985FC4C2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YY.MicroService.OrderServiceInstance", "YY.MicroService.OrderServiceInstance\YY.MicroService.OrderServiceInstance.csproj", "{58D1DBB6-3D9A-46BF-9828-A3AF8EE78079}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YY.MicroService.OrderServiceInstance", "YY.MicroService.OrderServiceInstance\YY.MicroService.OrderServiceInstance.csproj", "{58D1DBB6-3D9A-46BF-9828-A3AF8EE78079}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YY.MicroService.GatewayCenter", "YY.MicroService.GatewayCenter\YY.MicroService.GatewayCenter.csproj", "{4F13A1E3-EF9A-4959-9891-822161A36C1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +81,10 @@ Global
 		{58D1DBB6-3D9A-46BF-9828-A3AF8EE78079}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58D1DBB6-3D9A-46BF-9828-A3AF8EE78079}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58D1DBB6-3D9A-46BF-9828-A3AF8EE78079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F13A1E3-EF9A-4959-9891-822161A36C1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F13A1E3-EF9A-4959-9891-822161A36C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F13A1E3-EF9A-4959-9891-822161A36C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F13A1E3-EF9A-4959-9891-822161A36C1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +100,7 @@ Global
 		{64C86E6A-00F5-4278-BBA5-DF1A934782CB} = {23D53CD4-0637-42E7-8EAB-9FAB0F9110B6}
 		{E586B466-6029-457E-AF24-A75985FC4C2E} = {23D53CD4-0637-42E7-8EAB-9FAB0F9110B6}
 		{58D1DBB6-3D9A-46BF-9828-A3AF8EE78079} = {E032D23C-5362-46CB-BED7-26E289C8A0B6}
+		{4F13A1E3-EF9A-4959-9891-822161A36C1E} = {E032D23C-5362-46CB-BED7-26E289C8A0B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E95CAC4B-A9C0-4A67-9ADB-06A9087C498F}

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SkyApm.Utilities.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,12 +36,19 @@ namespace YY.MicroService.ServiceInstance
             services.AddControllers();
 
             services.AddTransient<IUserService, UserService>();
+
             #region Consul Server IOC×¢²á
             services.Configure<ConsulRegisterOptions>(this.Configuration.GetSection("ConsulRegisterOptions"));
             services.Configure<ConsulClientOptions>(this.Configuration.GetSection("ConsulClientOptions"));
             services.AddConsulRegister();
             services.AddConsulDispatcher(ConsulDispatcherType.Polling);
             #endregion
+
+            #region SkyWalking
+            //¼Óskywalking¼à¿ØÁ´Â·
+            services.AddSkyApmExtensions();
+            #endregion
+
             services.AddHttpInvoker(options =>
             {
                 options.Message = "This is Program's Message";

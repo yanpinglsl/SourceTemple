@@ -7,19 +7,17 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using SkyApm.AspNetCore.Diagnostics;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
+using Ocelot.Provider.Polly;
 using SkyApm.Utilities.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using YY.MicroService.Framework.ConsulExtend;
-using YY.MicroService.Framework.HttpApiExtend;
-using YY.MicroService.Interface;
-using YY.MicroService.Model;
-using YY.MicroService.Service;
 
-namespace YY.MicroService.OrderServiceInstance
+namespace YY.MicroService.GatewayCenter
 {
     public class Startup
     {
@@ -35,30 +33,17 @@ namespace YY.MicroService.OrderServiceInstance
         {
 
             services.AddControllers();
-
-            #region Consul Server IOC×¢²á
-            services.Configure<ConsulRegisterOptions>(this.Configuration.GetSection("ConsulRegisterOptions"));
-            services.Configure<ConsulClientOptions>(this.Configuration.GetSection("ConsulClientOptions"));
-            services.AddConsulRegister();
-            services.AddConsulDispatcher(ConsulDispatcherType.Polling);
-            #endregion
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "YY.MicroService.GatewayCenter", Version = "v1" });
+            });
+            services.AddOcelot()
+                    .AddConsul();
 
             #region SkyWalking
             //¼Óskywalking¼à¿ØÁ´Â·
             services.AddSkyApmExtensions();
             #endregion
-
-            services.AddHttpInvoker(options =>
-            {
-                options.Message = "This is Program's Message";
-            });
-            services.AddSingleton<IUserService, UserService>();
-            services.AddTransient<IOrderService, OrderService>();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "YY.MicroService.OrderServiceInstance", Version = "v1" });
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,13 +53,10 @@ namespace YY.MicroService.OrderServiceInstance
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "YY.MicroService.OrderServiceInstance v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "YY.MicroService.GatewayCenter v1"));
             }
 
-            #region Consul×¢²á
-            app.UseHealthCheckMiddleware("/Api/Health/Index");//ÐÄÌøÇëÇóÏìÓ¦
-            app.ApplicationServices.GetService<IConsulRegister>()?.UseConsulRegist();
-            #endregion
+            app.UseOcelot().Wait();
 
             app.UseHttpsRedirection();
 
